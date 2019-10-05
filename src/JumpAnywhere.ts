@@ -27,7 +27,7 @@ function provideDefinition(
   pathName = pathName.replace('@', src)
 
   // 绝对路径
-  if (path.isAbsolute(pathName)) {
+  if (!path.isAbsolute(pathName)) {
     pathName = path.resolve(workDir, pathName);
   }
 
