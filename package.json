@@ -2,6 +2,7 @@
 	"name": "jumpjumpjump",
 	"displayName": "JumpJumpJump",
 	"publisher": "FlyingFatPenguin",
+	"repository":"https://github.com/FlyingFatPenguin/JumpJumpJump",
 	"description": "",
 	"version": "0.0.1",
 	"engines": {
