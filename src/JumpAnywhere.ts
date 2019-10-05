@@ -31,12 +31,17 @@ function provideDefinition(
     pathName = path.resolve(workDir, pathName);
   }
 
-  console.log('pathName' + pathName)
+  console.log('pathName: ' + pathName)
+
+  // 对文件夹自动定位到 index 文件
+  if (isDir(pathName)) {
+    pathName = path.resolve(pathName, 'index');
+  }
 
   // 推断后缀
   let result = fixExtname(pathName);
 
-  console.log(result)
+  console.log('result: ' + result)
 
   if (result) {
     return new vscode.Location(vscode.Uri.file(result), new vscode.Position(0, 0))
@@ -91,18 +96,34 @@ function fixExtname(p: string) {
         return name;
       }
     }
-  }else{
-    if(fs.existsSync(p)){
+  } else {
+    if (fs.existsSync(p)) {
       return p;
     }
   }
   return undefined;
 }
 
+/**
+ * 判断当前路径对应的是否是文件夹
+ * @param pathName 路径
+ */
+function isDir(pathName: string) {
+  if(!fs.existsSync(pathName)){
+    return false;
+  }
+  let stat = fs.lstatSync(pathName)
+  if(stat){
+    return stat.isDirectory()
+  }else{
+    return false;
+  }
+}
+
 export default {
   enable(context: any) {
     // 注册如何实现跳转到定义，第一个参数表示仅对 js 文件生效
-    context.subscriptions.push(vscode.languages.registerDefinitionProvider(['javascript','vue'], {
+    context.subscriptions.push(vscode.languages.registerDefinitionProvider(['javascript', 'vue'], {
       provideDefinition
     }));
   }
