@@ -1,6 +1,7 @@
 {
 	"name": "jumpjumpjump",
 	"displayName": "JumpJumpJump",
+	"publisher": "FlyingFatPenguin",
 	"description": "",
 	"version": "0.0.1",
 	"engines": {
@@ -10,7 +11,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"onLanguage:javascript",
+		"onLanguage:vue"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
